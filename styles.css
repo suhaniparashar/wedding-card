@@ -462,15 +462,13 @@ input:focus,select:focus,textarea:focus{ outline:2px solid rgba(180,75,75,.25); 
     padding: 2rem 0 !important;
   }
   .hero .invocation {
-    font-size: 0.6rem;
     margin-bottom: 2rem;
-    letter-spacing: -0.02em;
-    width: 90%;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 0;
-    transform: scale(0.9);
-    font-weight: 600;
+  }
+  .hero .invocation .desktop-text {
+    display: none;
+  }
+  .hero .invocation .mobile-text {
+    display: inline-block;
   }
   .main-name {
     font-size: 48px;
@@ -593,16 +591,23 @@ input:focus,select:focus,textarea:focus{ outline:2px solid rgba(180,75,75,.25); 
 
 .hero .invocation {
   color: var(--gold);
-  font-family: 'Cinzel', serif;
-  font-size: 1.5rem;
-  letter-spacing: 0.02em;
   margin-bottom: 2.5rem;
   opacity: 0;
   animation: shimmer 2s ease-out forwards;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  padding: 0 10px;
+  text-align: center;
+}
+
+.hero .invocation .desktop-text {
+  font-family: 'Cinzel', serif;
+  font-size: 1.5rem;
+  letter-spacing: 0.02em;
+}
+
+.hero .invocation .mobile-text {
+  display: none;
+  font-family: 'Tiro Devanagari Hindi', serif;
+  font-size: 1.3rem;
+  letter-spacing: 0;
 }
 
 @keyframes shimmer {
