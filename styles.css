@@ -10,6 +10,8 @@
   --blush: #faeee2; /* peachy blush */
   --ivory: #fffaf2; /* ivory */
   --shadow: 0 10px 30px rgba(90, 40, 20, 0.15);
+  --blushTop: var(--bg); /* welcome/hero gradient top - matching existing theme */
+  --blushBottom: var(--blush); /* welcome/hero gradient bottom - matching existing theme */
 
   /* Sizing */
   --radius: 14px;
@@ -41,9 +43,61 @@ body::before{
 
 /* Utilities */
 .container{ max-width:var(--container); margin:0 auto; padding:0 20px }
-.section{ padding:80px 0; scroll-margin-top: calc(var(--header-h) + 12px); min-height:100vh; display:flex; align-items:center; position:relative }
-.section > .container{ position:relative; z-index:1; background:linear-gradient(180deg, rgba(255,255,255,.96), rgba(255,247,236,.98)); border:1.5px solid rgba(212,175,55,.5); border-radius:18px; box-shadow:0 18px 40px rgba(70,40,20,.08), inset 0 0 0 1px rgba(255,255,255,.6); padding:28px }
-.section:nth-of-type(even) > .container{ background:linear-gradient(180deg, rgba(255,247,236,.98), rgba(249,229,213,.20)) }
+.section{ 
+  padding: 80px 0; 
+  scroll-margin-top: calc(var(--header-h) + 12px); 
+  min-height: 100vh; 
+  display: flex; 
+  align-items: center; 
+  position: relative;
+  margin: 0;
+}
+.section + .section { 
+  margin-top: 0; 
+}
+.section > .container{ 
+  position: relative; 
+  z-index: 1; 
+  background: linear-gradient(180deg, rgba(255,255,255,.96), rgba(255,247,236,.98)); 
+  border: 1.5px solid rgba(212,175,55,.5); 
+  border-radius: 18px; 
+  box-shadow: 0 18px 40px rgba(70,40,20,.08), inset 0 0 0 1px rgba(255,255,255,.6); 
+  padding: 28px;
+}
+.section:nth-of-type(even) > .container{ 
+  background: linear-gradient(180deg, rgba(255,247,236,.98), rgba(249,229,213,.20)) 
+}
+
+/* Unified Welcome + Hero sections */
+.section.welcome,
+.section.hero {
+  background: linear-gradient(180deg, rgba(255,255,255,.96), rgba(255,247,236,.98));
+  overflow: hidden;
+}
+
+.section.welcome { 
+  padding-bottom: 0; 
+  min-height: auto;
+}
+
+.section.hero { 
+  margin-top: 0; 
+  padding-top: 0;
+}
+
+.section.welcome .section-title,
+.section.hero .overline { 
+  margin-top: 0; 
+}
+
+.section.welcome .container,
+.section.hero .container { 
+  padding-top: 28px; 
+  padding-bottom: 28px;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
 .section-title{ font-family:'Cinzel', serif; font-size:32px; margin:0 0 24px 0; text-align:center; position:relative; letter-spacing:.02em; color:var(--accent) }
 .section-title::after{ content:""; display:block; width:110px; height:2px; margin:10px auto 0; background:linear-gradient(90deg,var(--gold), var(--accent-2)); opacity:.8; border-radius:2px }
 .section-lead{ text-align:center; color:var(--muted); max-width:700px; margin:0 auto 22px }
@@ -59,15 +113,48 @@ body::before{
 .golden{ color:var(--gold) }
 
 /* Names vertical stack (Bride → Heart → Groom) */
-.names-vertical{ display:flex; flex-direction:column; align-items:center; gap:12px; margin:8px 0 18px }
-.names-vertical.reveal{ opacity:0; transform:translateY(16px); transition:opacity .6s ease, transform .6s ease }
-.names-vertical.reveal.in-view{ opacity:1; transform:none }
-.bride-block, .groom-block{ text-align:center; max-width:760px }
-.main-name{ font-family:'Great Vibes','Parisienne',serif; font-size:68px; margin:0; color:var(--accent); line-height:1 }
-.groom-name{ color:var(--accent-2) }
-.name-details{ font-family:'Cormorant Garamond', serif; color:var(--muted); font-size:15px; margin-top:8px }
-.name-details div{ margin-top:6px }
-.divider-heart{ font-size:40px; color:var(--gold); margin:8px 0 }
+.names-vertical{ 
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+  gap: 24px; 
+  margin: 0 0 2rem;
+}
+.names-vertical.reveal{ 
+  opacity: 0; 
+  transform: translateY(16px); 
+  transition: opacity .8s ease, transform .8s ease 
+}
+.names-vertical.reveal.in-view{ 
+  opacity: 1; 
+  transform: none 
+}
+.bride-block, .groom-block{ 
+  text-align: center;
+}
+.main-name{ 
+  font-family: 'Great Vibes','Parisienne',serif; 
+  font-size: 82px; 
+  margin: 0; 
+  color: var(--accent); 
+  line-height: 1;
+  text-shadow: 0 2px 4px rgba(180,75,75,0.1);
+}
+.groom-name{ 
+  color: var(--accent-2) 
+}
+.divider-heart{ 
+  font-size: 48px; 
+  color: var(--gold); 
+  margin: 0;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.1); opacity: 1; }
+  100% { transform: scale(1); opacity: 0.8; }
+}
 
 @media (max-width: 720px){
   .main-name{ font-size:44px }
@@ -76,7 +163,17 @@ body::before{
 }
 
 /* Big single card wrapper */
-.big-card{ position:relative; z-index: 1; max-width:calc(var(--container) + 40px); margin:24px auto; padding:22px; background:
+.big-card{ 
+  position: relative; 
+  z-index: 1; 
+  max-width: calc(var(--container) + 40px); 
+  margin: 24px auto; 
+  padding: 22px; 
+  background: transparent; 
+}
+.big-card main { 
+  background: transparent; 
+}
   linear-gradient(180deg, rgba(255,255,255,.96), rgba(255,251,242,.98)),
   url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80"><g fill="%23d4af3722"><path d="M40 4c2 6 6 10 12 12-6 2-10 6-12 12-2-6-6-10-12-12 6-2 10-6 12-12z"/></g></svg>') repeat; border:1.8px solid rgba(212,175,55,.55); border-radius:22px; box-shadow:0 22px 50px rgba(90,40,20,.10), inset 0 0 0 1px rgba(255,255,255,.65) }
 .big-card::before{ content:""; position:absolute; inset:0; pointer-events:none; 
@@ -171,61 +268,19 @@ input:focus,select:focus,textarea:focus{ outline:2px solid rgba(180,75,75,.25); 
   .form-grid{ grid-template-columns:1fr }
 }
 
-/* Welcome Block */
-.welcome-block {
+/* Hero Section */
+.hero {
   text-align: center;
-  padding: 2.5rem 1.5rem 2rem;
-  background: linear-gradient(180deg, rgba(255,255,255,.96), rgba(255,247,236,.98));
-  position: relative;
-  z-index: 1;
-  border-bottom: 1px dashed rgba(201,154,74,.35);
-  margin: 0 -22px 2rem;
+  padding: 4rem 0 3rem !important;
 }
 
-.welcome-block .invocation {
+.hero .invocation {
   color: var(--gold);
   font-family: 'Cinzel', serif;
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   letter-spacing: 0.02em;
-  margin-bottom: 0.5rem;
-}
-
-.welcome-block h2 {
-  color: var(--accent);
-  font-family: 'Great Vibes', cursive;
-  font-size: 4rem;
-  margin: 0 0 0.5rem;
-  font-weight: normal;
-  position: relative;
-  display: inline-block;
-}
-
-.welcome-block h2:after {
-  content: '';
-  position: absolute;
-  bottom: -0.25rem;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 120px;
-  height: 1px;
-  background: linear-gradient(90deg,var(--gold), var(--accent-2));
-  opacity: 0.8;
-  border-radius: 2px;
-}
-
-.welcome-block .welcome-text {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.25rem;
-  line-height: 1.4;
-  color: var(--text);
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.welcome-block .hosts {
-  margin: 0.5rem 0;
-  color: var(--text);
-  font-weight: 600;
+  margin-bottom: 2.5rem;
+  opacity: 0.9;
 }
 
 /* Floating Background */
