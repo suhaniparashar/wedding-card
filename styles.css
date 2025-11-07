@@ -462,11 +462,12 @@ input:focus,select:focus,textarea:focus{ outline:2px solid rgba(180,75,75,.25); 
     padding: 2rem 0 !important;
   }
   .hero .invocation {
-    font-size: 1.1rem;
+    font-size: 0.9rem;
     margin-bottom: 2rem;
-    letter-spacing: 0.01em;
+    letter-spacing: 0;
     width: 100%;
     max-width: 100%;
+    padding: 0 5px;
   }
   .main-name {
     font-size: 48px;
