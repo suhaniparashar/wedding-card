@@ -433,13 +433,152 @@ input:focus,select:focus,textarea:focus{ outline:2px solid rgba(180,75,75,.25); 
   .venue .venue-grid{ grid-template-columns:1fr }
   .timeline li{ grid-template-columns:1fr 40px 1fr }
 }
+/* Mobile Optimizations */
 @media (max-width: 720px){
-  .display{ font-size:44px }
-  .nav-toggle{ display:inline-block }
-  .nav-list{ position:fixed; top:var(--header-h); left:0; right:0; background:#fff; flex-direction:column; padding:10px 20px; gap:10px; border-bottom:1px solid rgba(0,0,0,.06); max-height:0; overflow:hidden; transition:max-height .3s ease }
-  .nav-list.open{ max-height:280px }
-  .event-grid{ grid-template-columns:1fr }
-  .form-grid{ grid-template-columns:1fr }
+  /* General Layout */
+  .container { 
+    padding: 0 16px;
+  }
+  .section {
+    padding: 40px 0;
+    min-height: auto;
+  }
+  .big-card {
+    margin: 12px;
+    padding: 12px;
+  }
+
+  /* Typography */
+  .display { 
+    font-size: 44px;
+  }
+  .section-title {
+    font-size: 28px;
+    margin-bottom: 20px;
+  }
+  
+  /* Hero Section */
+  .hero {
+    padding: 2rem 0 !important;
+  }
+  .hero .invocation {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    letter-spacing: 0.01em;
+    width: 100%;
+    max-width: 100%;
+  }
+  .main-name {
+    font-size: 48px;
+  }
+  .divider-heart {
+    font-size: 36px;
+  }
+  .names-vertical {
+    gap: 16px;
+    margin-bottom: 1.5rem;
+  }
+  .lead {
+    font-size: 1.1rem;
+  }
+  .date {
+    font-size: 1rem;
+  }
+  .venue {
+    font-size: 0.9rem;
+  }
+
+  /* Countdown */
+  .countdown {
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+  }
+  .countdown div {
+    min-width: calc(50% - 10px);
+    padding: 8px 10px;
+  }
+  .countdown span {
+    font-size: 20px;
+  }
+
+  /* Events Section */
+  .event-grid { 
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .event-card {
+    padding: 12px;
+  }
+  .event-card h3 {
+    font-size: 1.1rem;
+    margin: 0 0 4px 0;
+  }
+  .event-body .meta {
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+
+  /* Venue Section */
+  .venue .venue-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .map-embed {
+    margin: 0 -12px;
+    border-radius: 0;
+  }
+  .map-embed iframe {
+    height: 250px;
+  }
+
+  /* Floating Elements */
+  .floating-bg span {
+    width: 24px;
+    height: 24px;
+  }
+  
+  /* Back to Top Button */
+  .back-to-top {
+    width: 40px;
+    height: 40px;
+    bottom: 16px;
+    right: 16px;
+    font-size: 16px;
+  }
+
+  /* Footer */
+  .site-footer {
+    padding: 20px 0;
+    font-size: 0.9rem;
+  }
+  
+  /* Navigation */
+  .nav-toggle { 
+    display: inline-block;
+  }
+  .nav-list { 
+    position: fixed;
+    top: var(--header-h);
+    left: 0;
+    right: 0;
+    background: #fff;
+    flex-direction: column;
+    padding: 10px 20px;
+    gap: 10px;
+    border-bottom: 1px solid rgba(0,0,0,.06);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .3s ease;
+  }
+  .nav-list.open {
+    max-height: 280px;
+  }
+  
+  /* Forms */
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* Hero Section */
@@ -456,6 +595,10 @@ input:focus,select:focus,textarea:focus{ outline:2px solid rgba(180,75,75,.25); 
   margin-bottom: 2.5rem;
   opacity: 0;
   animation: shimmer 2s ease-out forwards;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0 10px;
 }
 
 @keyframes shimmer {
@@ -490,6 +633,11 @@ body {
   pointer-events: none;
   z-index: -1;
   overflow: hidden;
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  -webkit-perspective: 1000;
+  perspective: 1000;
 }
 
 .floating-bg span {

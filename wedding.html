@@ -2,7 +2,11 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta name="theme-color" content="#fff8f3" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="format-detection" content="telephone=yes" />
     <title>Prachi ❤ Shreyanshu • Wedding</title>
     <meta name="description" content="You're invited to the wedding of Prachi and Shreyanshu from 2 to 5 December 2025 in Bharatpur." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -199,12 +203,33 @@
       }, { threshold: 0.12 });
       document.querySelectorAll('.reveal').forEach(el=> observer.observe(el));
 
-      // Back to top button
+      // Back to top button with touch support
       const backTop = document.querySelector('.back-to-top');
+      
+      // Handle scroll for back to top button
       window.addEventListener('scroll', () => {
         backTop.hidden = window.scrollY <= 600;
       });
-      backTop?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+      // Add touch and click support
+      backTop?.addEventListener('click', scrollToTop);
+      backTop?.addEventListener('touchend', scrollToTop);
+
+      function scrollToTop(e) {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      // Add touch feedback for event cards
+      document.querySelectorAll('.event-card').forEach(card => {
+        card.addEventListener('touchstart', () => {
+          card.style.transform = 'translateY(-2px) scale(0.98)';
+        }, { passive: true });
+        
+        card.addEventListener('touchend', () => {
+          card.style.transform = '';
+        }, { passive: true });
+      });
     </script>
   </body>
 </html>
