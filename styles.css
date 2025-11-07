@@ -465,10 +465,14 @@ input:focus,select:focus,textarea:focus{ outline:2px solid rgba(180,75,75,.25); 
     margin-bottom: 2rem;
   }
   .hero .invocation .desktop-text {
-    display: none;
+    display: block;
+    font-size: 0.65rem;
+    letter-spacing: -0.02em;
   }
   .hero .invocation .mobile-text {
-    display: inline-block;
+    display: block;
+    font-size: 0.9rem;
+    margin-top: 4px;
   }
   .main-name {
     font-size: 48px;
