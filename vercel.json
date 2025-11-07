@@ -1,0 +1,20 @@
+{
+  "version": 2,
+  "name": "wedding-card-prachi-and-shreyanshu",
+  "public": true,
+  "trailingSlash": false,
+  "rewrites": [
+    { "source": "/", "destination": "/weeding.html" }
+  ],
+  "redirects": [
+    { "source": "/wedding.html", "destination": "/weeding.html", "permanent": true }
+  ],
+  "headers": [
+    {
+      "source": "/styles.css",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    }
+  ]
+}
